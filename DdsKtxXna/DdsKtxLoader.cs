@@ -42,9 +42,6 @@ namespace DdsKtxXna
 
 					imageData = newImageData;
 					break;
-
-				default:
-					throw new Exception("Format " + info.format.ToString() + "isn't supported.");
 			}
 
 			return imageData;

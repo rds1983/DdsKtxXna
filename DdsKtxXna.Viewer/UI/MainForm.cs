@@ -19,9 +19,9 @@ namespace DdsKtxXna.Viewer.UI
 
 			_buttonBrowse.Click += (s, a) =>
 			{
-				FileDialog dialog = new FileDialog(FileDialogMode.OpenFile)
+				var dialog = new FileDialog(FileDialogMode.OpenFile)
 				{
-					Filter = "*.dds",
+					Filter = "*.dds|*.ktx",
 					FilePath = _textBoxPath.Text,
 				};
 
