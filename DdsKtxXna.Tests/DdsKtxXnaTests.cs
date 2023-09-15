@@ -12,23 +12,23 @@ namespace DdsKtxXna.Tests
 	{
 		private static readonly Assembly _assembly = typeof(DdsKtxXnaTests).Assembly;
 
-		[Test]
-		public void TestTexture2D()
+		[TestCase("background.dds", 1, 1024, 1024, SurfaceFormat.Dxt1)]
+		[TestCase("fire.dds", 1, 64, 64, SurfaceFormat.Dxt5)]
+		public void TestTexture2D(string imageName, int levels, int width, int height, SurfaceFormat format)
 		{
-			string imageName = "background.dds";
-
-			Texture2D texture;
+			Texture texture;
 			using (var stream = _assembly.OpenResourceStream(imageName))
 			{
-				texture = DdsKtxLoader.Texture2DFromStream(TestsEnvironment.GraphicsDevice, stream);
+				texture = DdsKtxLoader.FromStream(TestsEnvironment.GraphicsDevice, stream);
 			}
 
-			Assert.AreEqual(texture.LevelCount, 1);
-			Assert.AreEqual(texture.Width, 1024);
-			Assert.AreEqual(texture.Height, 1024);
-			Assert.AreEqual(texture.LevelCount, 1);
+			Assert.IsInstanceOf<Texture2D>(texture);
 
-			Assert.AreEqual(texture.Format, SurfaceFormat.Dxt1);
+			var texture2D = (Texture2D)texture;
+			Assert.AreEqual(levels, texture2D.LevelCount);
+			Assert.AreEqual(width, texture2D.Width);
+			Assert.AreEqual(height, texture2D.Height);
+			Assert.AreEqual(format, texture2D.Format);
 		}
 
 		[Test]
@@ -36,15 +36,18 @@ namespace DdsKtxXna.Tests
 		{
 			string imageName = "SkyBox.dds";
 
-			TextureCube texture;
+			Texture result;
 			using(var stream = _assembly.OpenResourceStream(imageName))
 			{
-				texture = DdsKtxLoader.TextureCubeFromStream(TestsEnvironment.GraphicsDevice, stream);
+				result = DdsKtxLoader.FromStream(TestsEnvironment.GraphicsDevice, stream);
 			}
 
-			Assert.AreEqual(texture.LevelCount, 1);
-			Assert.AreEqual(texture.Size, 512);
-			Assert.AreEqual(texture.Format, SurfaceFormat.Color);
+			Assert.IsInstanceOf<TextureCube>(result);
+
+			var textureCube = (TextureCube)result;
+			Assert.AreEqual(textureCube.LevelCount, 1);
+			Assert.AreEqual(textureCube.Size, 512);
+			Assert.AreEqual(textureCube.Format, SurfaceFormat.Color);
 		}
 	}
 }
