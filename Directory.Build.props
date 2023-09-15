@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <Authors>DdsKtxXnaTeam</Authors>
+    <Product>DdsKtxXna</Product>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/rds1983/DdsKtxXna</PackageProjectUrl>
+    <RootNamespace>DdsKtxXna</RootNamespace>
+    <Description>MonoGame/FNA library for loading DDS and KTX images.</Description>
+    <Version>0.4.0</Version>
+    <MonoGameVersion>3.8.1.303</MonoGameVersion>
+	<DdsKtxSharpVersion>1.1.0.1</DdsKtxSharpVersion>
+  </PropertyGroup>
+</Project>
