@@ -16,10 +16,10 @@ jobs:
       with:
         dotnet-version: '6.0.x'
     - name: Build DdsKtxXna.MonoGame
-      run: dotnet build build/DdsKtxXna.MonoGame.sln --configuration Release
+      run: dotnet build DdsKtxXna.MonoGame.sln --configuration Release
     - name: Test
-      run: dotnet test build/DdsKtxXna.MonoGame.sln
+      run: dotnet test DdsKtxXna.MonoGame.sln
     - name: Install NuGet
       uses: NuGet/setup-nuget@v1
     - name: Publish DdsKtxXna.MonoGame to NuGet
-      run: nuget.exe push src\bin\MonoGame\Release\DdsKtxXna.MonoGame.*.nupkg ${{secrets.NUGET_APIKEY}} -Source https://api.nuget.org/v3/index.json
+      run: nuget.exe push DdsKtxXna\bin\MonoGame\Release\DdsKtxXna.MonoGame.*.nupkg ${{secrets.NUGET_APIKEY}} -Source https://api.nuget.org/v3/index.json

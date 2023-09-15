@@ -21,6 +21,6 @@ jobs:
       with:
         dotnet-version: '6.0.x'
     - name: Build DdsKtxXna.MonoGame
-      run: dotnet build build/DdsKtxXna.MonoGame.sln --configuration Release
+      run: dotnet build DdsKtxXna.MonoGame.sln --configuration Release
     - name: Test
-      run: dotnet test build/DdsKtxXna.MonoGame.sln
+      run: dotnet test DdsKtxXna.MonoGame.sln
