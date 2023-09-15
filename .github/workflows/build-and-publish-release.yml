@@ -1,0 +1,25 @@
+name: Build & Publish Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  BuildAndPublish:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+    - name: Build DdsKtxXna.MonoGame
+      run: dotnet build build/DdsKtxXna.MonoGame.sln --configuration Release
+    - name: Test
+      run: dotnet test build/DdsKtxXna.MonoGame.sln
+    - name: Install NuGet
+      uses: NuGet/setup-nuget@v1
+    - name: Publish DdsKtxXna.MonoGame to NuGet
+      run: nuget.exe push src\bin\MonoGame\Release\DdsKtxXna.MonoGame.*.nupkg ${{secrets.NUGET_APIKEY}} -Source https://api.nuget.org/v3/index.json

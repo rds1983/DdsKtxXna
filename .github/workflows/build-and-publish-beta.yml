@@ -1,0 +1,26 @@
+name: Build & Publish Beta
+
+on:
+    push:
+        paths:
+            - 'DdsKtxXna/**'
+            - 'DdsKtxXna.Tests/**'
+            - 'DdsKtxXna.Viewer/**'
+    workflow_dispatch:
+
+jobs:
+  BuildAndPublish:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: recursive
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '6.0.x'
+    - name: Build DdsKtxXna.MonoGame
+      run: dotnet build build/DdsKtxXna.MonoGame.sln --configuration Release
+    - name: Test
+      run: dotnet test build/DdsKtxXna.MonoGame.sln
