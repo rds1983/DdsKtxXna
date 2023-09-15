@@ -9,7 +9,7 @@ https://www.nuget.org/packages/DdsKtxXna.MonoGame/
 # Usage
 ```c#
 Texture texture;
-using(var stream = File.OpenRead("image.dds")
+using(var stream = File.OpenRead("image.dds"))
 {
   texture = DdsKtxLoader.FromStream(GraphicsDevice, stream);
 }
