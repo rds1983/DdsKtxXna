@@ -67,6 +67,13 @@ namespace DdsKtxXna
 					format = SurfaceFormat.Dxt5;
 					break;
 
+				case ddsktx_format.DDSKTX_FORMAT_A8:
+					format = SurfaceFormat.Alpha8;
+					break;
+
+				case ddsktx_format.DDSKTX_FORMAT_RGBA8:
+					break;
+
 				case ddsktx_format.DDSKTX_FORMAT_BGRA8:
 					break;
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Myra;
 
@@ -8,11 +9,32 @@ namespace DdsKtxXna
 	{
 		public static Texture2D FaceToTexture(this TextureCube texture, CubeMapFace face)
 		{
-			var data = new Color[texture.Size * texture.Size];
-			texture.GetData(face, data);
+			Texture2D result = null;
 
-			var result = new Texture2D(MyraEnvironment.GraphicsDevice, texture.Size, texture.Size);
-			result.SetData(data);
+			switch(texture.Format)
+			{
+				case SurfaceFormat.Color:
+					{
+						var data = new Color[texture.Size * texture.Size];
+						texture.GetData(face, data);
+
+						result = new Texture2D(MyraEnvironment.GraphicsDevice, texture.Size, texture.Size);
+						result.SetData(data);
+					}
+					break;
+				case SurfaceFormat.Dxt1:
+					{
+						var data = new byte[texture.Size * texture.Size / 2];
+						texture.GetData(face, data);
+
+						result = new Texture2D(MyraEnvironment.GraphicsDevice, texture.Size, texture.Size, false, format: SurfaceFormat.Dxt1);
+						result.SetData(data);
+					}
+					break;
+				default:
+					throw new Exception($"Format {texture.Format} isn't supported.");
+			}
+			
 
 			return result;
 		}

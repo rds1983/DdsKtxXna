@@ -21,7 +21,7 @@ namespace DdsKtxXna.Viewer.UI
 			{
 				var dialog = new FileDialog(FileDialogMode.OpenFile)
 				{
-					Filter = "*.dds|*.ktx",
+					Filter = "*.dds|*.ktx|*.png",
 					FilePath = _textBoxPath.Text,
 				};
 
@@ -76,9 +76,19 @@ namespace DdsKtxXna.Viewer.UI
 
 			try
 			{
-				using (var stream = File.OpenRead(path))
+				var lower = path.ToLower();
+				if (lower.EndsWith(".dds") || lower.EndsWith(".ktx"))
 				{
-					texture = DdsKtxLoader.FromStream(MyraEnvironment.GraphicsDevice, stream);
+					using (var stream = File.OpenRead(path))
+					{
+						texture = DdsKtxLoader.FromStream(MyraEnvironment.GraphicsDevice, stream);
+					}
+				} else
+				{
+					using (var stream = File.OpenRead(path))
+					{
+						texture = Texture2D.FromStream(MyraEnvironment.GraphicsDevice, stream);
+					}
 				}
 			}
 			catch(Exception ex)

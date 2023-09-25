@@ -1,25 +1,27 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <AssemblyName>Nursia</AssemblyName>
-    <PackageId>Nursia.FNA.Core</PackageId>
+    <AssemblyName>DdsKtxXna</AssemblyName>
+    <PackageId>DdsKtxXna.FNA</PackageId>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DefineConstants>$(DefineConstants);FNA</DefineConstants>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <OutputPath>bin\FNA.Core\$(Configuration)</OutputPath>
+    <DefineConstants>$(DefineConstants);FNA;DDSKTXSHARP_INTERNAL</DefineConstants>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <OutputPath>bin\FNA\$(Configuration)</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>	
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
-
   <ItemGroup>
-    <EmbeddedResource Include="Resources\**\*.*" />
-    <EmbeddedResource Include="EffectsSource\FNA\*.*" />
+    <Compile Include="..\Submodules\DdsKtxSharp\src\CRuntime.cs" Link="DdsKtxSharp\CRuntime.cs" />
+    <Compile Include="..\Submodules\DdsKtxSharp\src\DdsKtxParser.cs" Link="DdsKtxSharp\DdsKtxParser.cs" />
+    <Compile Include="..\Submodules\DdsKtxSharp\src\DdsKtxSharp.cs" Link="DdsKtxSharp\DdsKtxSharp.cs" />
+    <Compile Include="..\Submodules\DdsKtxSharp\src\DdsKtxSharp.Generated.cs" Link="DdsKtxSharp\DdsKtxSharp.Generated.cs" />
+    <Compile Include="..\Submodules\DdsKtxSharp\src\MemoryStats.cs" Link="DdsKtxSharp\MemoryStats.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="StbImageWriteSharp" Version="1.16.7" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\XNAssets\src\XNAssets.FNA.Core.csproj" />
+    <ProjectReference Include="..\..\FNA\FNA.Core.csproj" />
   </ItemGroup>
 </Project>
