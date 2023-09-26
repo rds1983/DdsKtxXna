@@ -12,8 +12,8 @@ namespace DdsKtxXna.Tests
 	{
 		private static readonly Assembly _assembly = typeof(DdsKtxXnaTests).Assembly;
 
-		[TestCase("background.dds", 1, 1024, 1024, SurfaceFormat.Dxt1)]
-		[TestCase("fire.dds", 1, 64, 64, SurfaceFormat.Dxt5)]
+		[TestCase("background.dds", 11, 1024, 1024, SurfaceFormat.Dxt1)]
+		[TestCase("fire.dds", 7, 64, 64, SurfaceFormat.Dxt5)]
 		public void TestTexture2D(string imageName, int levels, int width, int height, SurfaceFormat format)
 		{
 			Texture texture;
@@ -31,11 +31,10 @@ namespace DdsKtxXna.Tests
 			Assert.AreEqual(format, texture2D.Format);
 		}
 
-		[Test]
-		public void TestTextureCube()
+		[TestCase("SkyBox.dds", 1, 512, SurfaceFormat.Color)]
+		[TestCase("Sky2.dds", 10, 512, SurfaceFormat.Dxt1)]
+		public void TestTextureCube(string imageName, int levelCount, int size, SurfaceFormat format)
 		{
-			string imageName = "SkyBox.dds";
-
 			Texture result;
 			using(var stream = _assembly.OpenResourceStream(imageName))
 			{
@@ -45,9 +44,9 @@ namespace DdsKtxXna.Tests
 			Assert.IsInstanceOf<TextureCube>(result);
 
 			var textureCube = (TextureCube)result;
-			Assert.AreEqual(textureCube.LevelCount, 1);
-			Assert.AreEqual(textureCube.Size, 512);
-			Assert.AreEqual(textureCube.Format, SurfaceFormat.Color);
+			Assert.AreEqual(levelCount, textureCube.LevelCount);
+			Assert.AreEqual(size, textureCube.Size);
+			Assert.AreEqual(format, textureCube.Format);
 		}
 	}
 }
