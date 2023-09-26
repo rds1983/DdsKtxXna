@@ -8,12 +8,12 @@ namespace DdsKtxXna
 {
 	public class DdsKtxLoader
 	{
-		private static byte[] LoadFace(DdsKtxParser parser, int faceIndex)
+		private static byte[] LoadFace(DdsKtxParser parser, int faceIndex, int levelIndex)
 		{
 			ddsktx_texture_info info = parser.Info;
 
 			ddsktx_sub_data sub_data;
-			var imageData = parser.GetSubData(0, faceIndex, 0, out sub_data);
+			var imageData = parser.GetSubData(0, faceIndex, levelIndex, out sub_data);
 
 			switch (info.format)
 			{
@@ -91,21 +91,37 @@ namespace DdsKtxXna
 
 			if (!isCubeMap)
 			{
-				Texture2D texture2D = new Texture2D(device, info.width, info.height, false, format);
-
-				var imageData = LoadFace(parser, 0);
-				texture2D.SetData(imageData);
+				Texture2D texture2D = new Texture2D(device, info.width, info.height, info.num_mips > 1, format);
+				for (var i = 0; i < info.num_mips; ++i)
+				{
+					var imageData = LoadFace(parser, 0, i);
+					texture2D.SetData(i, null, imageData, 0, imageData.Length);
+				}
 
 				result = texture2D;
 			} else
 			{
-				var textureCube = new TextureCube(device, info.width, false, format);
-				textureCube.SetData(CubeMapFace.PositiveX, LoadFace(parser, 0));
-				textureCube.SetData(CubeMapFace.NegativeX, LoadFace(parser, 1));
-				textureCube.SetData(CubeMapFace.PositiveY, LoadFace(parser, 2));
-				textureCube.SetData(CubeMapFace.NegativeY, LoadFace(parser, 3));
-				textureCube.SetData(CubeMapFace.PositiveZ, LoadFace(parser, 4));
-				textureCube.SetData(CubeMapFace.NegativeZ, LoadFace(parser, 5));
+				var textureCube = new TextureCube(device, info.width, info.num_mips > 1, format);
+				for (var i = 0; i < info.num_mips; ++i)
+				{
+					var imageData = LoadFace(parser, 0, i);
+					textureCube.SetData(CubeMapFace.PositiveX, i, null, imageData, 0, imageData.Length);
+
+					imageData = LoadFace(parser, 1, i);
+					textureCube.SetData(CubeMapFace.NegativeX, i, null, imageData, 0, imageData.Length);
+
+					imageData = LoadFace(parser, 2, i);
+					textureCube.SetData(CubeMapFace.PositiveY, i, null, imageData, 0, imageData.Length);
+
+					imageData = LoadFace(parser, 3, i);
+					textureCube.SetData(CubeMapFace.NegativeY, i, null, imageData, 0, imageData.Length);
+
+					imageData = LoadFace(parser, 4, i);
+					textureCube.SetData(CubeMapFace.PositiveZ, i, null, imageData, 0, imageData.Length);
+
+					imageData = LoadFace(parser, 5, i);
+					textureCube.SetData(CubeMapFace.NegativeZ, i, null, imageData, 0, imageData.Length);
+				}
 
 				result = textureCube;
 			}
