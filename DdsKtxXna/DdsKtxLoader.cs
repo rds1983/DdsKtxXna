@@ -31,7 +31,7 @@ namespace DdsKtxXna
 
 				case ddsktx_format.DDSKTX_FORMAT_RGB8:
 					// Add alpha channel
-					var newImageData = new byte[info.width * info.height * 4];
+					var newImageData = new byte[sub_data.width * sub_data.height * 4];
 					for (var i = 0; i < newImageData.Length / 4; ++i)
 					{
 						newImageData[i * 4] = imageData[i * 3 + 2];
