@@ -14,6 +14,7 @@ namespace DdsKtxXna.Tests
 
 		[TestCase("background.dds", 11, 1024, 1024, SurfaceFormat.Dxt1)]
 		[TestCase("fire.dds", 7, 64, 64, SurfaceFormat.Dxt5)]
+		[TestCase("wave0.dds", 10, 512, 512, SurfaceFormat.Color)]
 		public void TestTexture2D(string imageName, int levels, int width, int height, SurfaceFormat format)
 		{
 			Texture texture;
