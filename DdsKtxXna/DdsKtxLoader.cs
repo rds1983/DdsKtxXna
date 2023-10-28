@@ -6,7 +6,7 @@ using static DdsKtxSharp.DdsKtx;
 
 namespace DdsKtxXna
 {
-	public class DdsKtxLoader
+	public static class DdsKtxLoader
 	{
 		private static byte[] LoadFace(DdsKtxParser parser, int faceIndex, int levelIndex)
 		{
