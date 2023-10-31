@@ -6,7 +6,8 @@
     <PackageProjectUrl>https://github.com/rds1983/DdsKtxXna</PackageProjectUrl>
     <RootNamespace>DdsKtxXna</RootNamespace>
     <Description>MonoGame/FNA library for loading DDS and KTX images.</Description>
-    <Version>0.4.3</Version>
-    <MonoGameVersion>3.8.1.303</MonoGameVersion>
+    <Version>0.4.4</Version>
+    <MonoGameVersion>3.8.0.1641</MonoGameVersion>
+    <AppMonoGameVersion>3.8.1.303</AppMonoGameVersion>
   </PropertyGroup>
 </Project>

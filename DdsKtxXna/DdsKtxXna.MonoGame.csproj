@@ -4,7 +4,7 @@
     <PackageId>DdsKtxXna.MonoGame</PackageId>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);MONOGAME;DDSKTXSHARP_INTERNAL</DefineConstants>
-    <TargetFrameworks>net6.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <OutputPath>bin\MonoGame\$(Configuration)</OutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>	
   </PropertyGroup>
