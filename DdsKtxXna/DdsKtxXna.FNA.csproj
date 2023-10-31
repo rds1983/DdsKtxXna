@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>DdsKtxXna</AssemblyName>
+    <PackageId>DdsKtxXna.FNA</PackageId>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DefineConstants>$(DefineConstants);FNA;DDSKTXSHARP_INTERNAL</DefineConstants>
+    <TargetFrameworks>net471</TargetFrameworks>
+    <OutputPath>bin\FNA\$(Configuration)</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>	
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Submodules\DdsKtxSharp\src\CRuntime.cs" Link="DdsKtxSharp\CRuntime.cs" />
+    <Compile Include="..\Submodules\DdsKtxSharp\src\DdsKtxParser.cs" Link="DdsKtxSharp\DdsKtxParser.cs" />
+    <Compile Include="..\Submodules\DdsKtxSharp\src\DdsKtxSharp.cs" Link="DdsKtxSharp\DdsKtxSharp.cs" />
+    <Compile Include="..\Submodules\DdsKtxSharp\src\DdsKtxSharp.Generated.cs" Link="DdsKtxSharp\DdsKtxSharp.Generated.cs" />
+    <Compile Include="..\Submodules\DdsKtxSharp\src\MemoryStats.cs" Link="DdsKtxSharp\MemoryStats.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\FNA\FNA.csproj" />
+  </ItemGroup>
+</Project>
