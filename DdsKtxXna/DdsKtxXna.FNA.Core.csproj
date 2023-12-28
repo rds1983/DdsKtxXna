@@ -4,7 +4,7 @@
     <PackageId>DdsKtxXna.FNA</PackageId>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DefineConstants>$(DefineConstants);FNA;DDSKTXSHARP_INTERNAL</DefineConstants>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net7.0</TargetFrameworks>
     <OutputPath>bin\FNA\$(Configuration)</OutputPath>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>	
   </PropertyGroup>
